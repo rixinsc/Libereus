@@ -86,7 +86,7 @@ if __name__ == "__main__":
 		if not len(components) == 0:
 			await msg.edit(content=f"{method.capitalize()}ed {', '.join(components)} component.")
 		else:
-			await msg.edit(content="No component match your query.")
+			await msg.edit(content="No component matches your query.")
 
 	@reload.error
 	@unload.error
