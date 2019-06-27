@@ -1,2 +1,2 @@
-# LIbereusBot
+# Libereus
 Discord Hack Week rocks!
