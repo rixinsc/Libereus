@@ -8,18 +8,18 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 	"""Actions in Discord, turned to commands."""
 	@commands.command()
 	@commands.has_permissions(kick_members=True)
-	async def kick(self, ctx, members: commands.Greedy[discord.Member], reason: str = 'None'):
+	async def kick(self, ctx, members: commands.Greedy[discord.Member], reason: str = 'N/A'):
 		"""Kick a user from the guild with an optional reason."""
 		for m in members:
-			await m.kick(reason="Reason: {reason}\nRequested by {mod}.".format(reason=reason, mod=ctx.author))
+			await m.kick(reason="Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author))
 		await ctx.send("✅ Kicked {count} user{s} from the guild.".format(count=len(members), s='s' if len(members)>1 else ''))
 
 	@commands.command()
 	@commands.has_permissions(ban_members=True)
-	async def ban(self, ctx, members: commands.Greedy[discord.Member], reason: str = "None"):
+	async def ban(self, ctx, members: commands.Greedy[discord.Member], reason: str = "N/A"):
 		"""Ban a user fron the guild with an optional reason."""
 		for m in members:
-			await m.kick(reason="Reason: {reason}\nRequested by {mod}.".format(reason=reason, mod=ctx.author))
+			await m.kick(reason="Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author))
 		await ctx.send("🔨 Banned {count} user{s} from the guild.".format(count=len(members), s='s' if len(members)>1 else ''))
 
 	@commands.group()
