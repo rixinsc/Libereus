@@ -1,0 +1,107 @@
+#!/usr/bin/python3.6
+# -*- coding: utf-8 -*-
+from discord.ext import commands
+from core.helper import cmderr, eprint, sprint
+from core.classes import Bot
+import sys, os
+import asyncio
+import json
+from pathlib import Path
+from fnmatch import filter
+
+if __name__ == "__main__":
+	# Initialise
+	if sys.platform == 'win32':
+		loop = asyncio.ProactorEventLoop()
+	else:
+		loop = asyncio.get_event_loop()
+	os.chdir(Path(__file__).resolve().parent)
+
+	with open("settings.json", "r", encoding="utf8") as file:
+		settings = json.load(file, encoding='utf8')
+
+	bot = Bot(command_prefix=('/', 'libereus'), pm_help=None, loop=loop)
+	#TODO: only PM when the help msg >100 chars
+
+	ext_path = "cmds"
+
+	@bot.event
+	async def on_ready():
+		sprint('Logged in as {}\n'.format(bot.user))
+
+	@bot.check
+	async def useable(ctx):
+		try:
+			whitelist = settings['whitelist']
+			if ctx.guild is None:
+				return False
+			elif ctx.author.id == bot.owner_id:
+				return True
+			elif not ((ctx.author.id in whitelist['user']) or (ctx.channel.id in whitelist['channel']) or (ctx.guild.id in whitelist['guild'])):
+				return False
+			return True
+		except Exception as e:
+			eprint(e)
+			return False
+
+	@bot.command(hidden=True)
+	@commands.is_owner()
+	async def reload(ctx, component: str):
+		"""Reload a component."""
+		if component == 'settings':
+			global settings
+			with open("settings.json", "r", encoding="utf8") as file:
+				settings = json.load(file, encoding='utf8')
+			await ctx.send('Reloaded settings.')
+			return
+		await wildcardCheck(ctx, "reload", component)
+	@bot.command(hidden=True)
+	@commands.is_owner()
+	async def unload(ctx, component: str):
+		"""Unload a component."""
+		await wildcardCheck(ctx, "unload", component)
+	@bot.command(hidden=True)
+	@commands.is_owner()
+	async def load(ctx, component: str):
+		"""Load a component."""
+		await wildcardCheck(ctx, "load", component)
+
+	async def wildcardCheck(ctx, method: str, query: str) -> None:
+		if not method in ('load', 'unload', 'reload'):
+			raise ValueError("Unsupported method {}.".format(method))
+		msg = await ctx.send("{}ing component...".format(method.capitalize()))
+		files = os.listdir(ext_path)
+		files = [file[:-3] for file in os.listdir(ext_path) if file.endswith(".py")]
+		components = filter(files, query)
+		if method == 'reload':
+			for comp in components:
+				bot.reload_extension(f"{ext_path}.{comp}")
+		elif method == 'unload':
+			for comp in components:
+				bot.unload_extension(f"{ext_path}.{comp}")
+		elif method == 'load':
+			for comp in components:
+				bot.load_extension(f"{ext_path}.{comp}")
+		components = ["`"+x+"`" for x in components]
+		if not len(components) == 0:
+			await msg.edit(content=f"{method.capitalize()}ed {', '.join(components)} component.")
+		else:
+			await msg.edit(content="No component match your query.")
+
+	@reload.error
+	@unload.error
+	@load.error
+	async def errReload(ctx, e):
+		await cmderr(ctx, e, 
+			commands_errors_NotOwner='r'+'Only owner can use this command.', 
+			commands_errors_MissingRequiredArgument="r"+f'Please specify a component to {ctx.command.name}.',
+			commands_errors_ExtensionNotLoaded="r"+f"Can't {ctx.command.name}.  Extension hasn't been loaded.",
+			commands_errors_NoEntryPointError="r"+"Extension doesn't have an entry point. (Missing `setup` function)",
+			commands_errors_ExtensionNotFound="r"+"Extension not found.")
+
+	for file in os.listdir(ext_path):
+		if file.endswith(".py"):
+			name = file[:-3]
+			bot.load_extension(f"{ext_path}.{name}")
+
+	bot.run(settings['token'])
