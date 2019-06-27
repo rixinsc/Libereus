@@ -77,8 +77,8 @@ class Main(ExtensionBase):
 		for dev in jdev:
 			devs = devs + dev + "\n"
 		# 
-		embed = discord.Embed(title="About Libereus", description="Bot created for Discord Hack Week 19", url="https://www.youtube.com/watch?v=9YvmEX7VjiY", color=0x01b69b)
-		embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/WPVG_icon_2016.svg/1024px-WPVG_icon_2016.svg.png")
+		embed = discord.Embed(title="About Libereus", description="Bot created for Discord Hack Week 19",  color=0x01b69b)
+		embed.set_thumbnail(url="https://sc.s-ul.eu/FEYj6UQg")
 		embed.add_field(name="Developers", value=devs, inline=False)
 		embed.add_field(name="Invite Link", value=jdata['Invite Link'] , inline=False)
 		embed.add_field(name="Website", value=jdata['Website'], inline=False)
