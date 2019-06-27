@@ -8,7 +8,7 @@ import datetime
 class Automod(ExtensionBase):
 	"""Auto moderation commands."""
 	@commands.command()
-	@commands.has_permissions(kick_members=True)
+	@commands.has_permissions(kick_members=False)
 	async def prunemembers(self, ctx, days: int, include_no_message: bool = False):
 		"""Prune inactive member (i.e. no message sent) given an inactive interval(days, minimum 1).
 		Note that join/pin system message will also be considered as user's message.

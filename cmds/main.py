@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from core.scripts import dcEscape
 from core.classes import ExtensionBase
-import time, datetime
+import time, datetime, json
 # from core.classes import Whitelist
 
 # new_whitelist = Whitelist()
@@ -67,16 +67,24 @@ class Main(ExtensionBase):
 			embed.add_field(name="Result", value=":white_check_mark: Damn, this guy is fine!")
 			await ctx.channel.send(embed=embed)
 
-	
-	@commands.command(enabled=False)
-	async def whitelist(self, ctx, user: discord.Member):
-		new_whitelist.white.append(user)
-		new_whitelist.name.append(user.name)
-		await ctx.send(f"Appended {user} to white list.")
-	
-	@commands.command(enabled=False)
-	async def show_white(self, ctx):
-		await ctx.send(new_whitelist.name)
+	@commands.command()
+	async def info(self, ctx):
+		with open(r'H:\Coding\Github\Libereus\settings.json', mode='r', encoding='utf-8') as file:
+			jdata = json.load(file, encoding='utf-8')
+		# Developers
+		jdev = jdata["Developers"]
+		devs = ""
+		for dev in jdev:
+			devs = devs + dev + "\n"
+		# 
+		embed = discord.Embed(title="About Libereus", description="Bot created for Discord Hack Week 19",  color=0x01b69b)
+		embed.set_thumbnail(url="https://sc.s-ul.eu/FEYj6UQg")
+		embed.add_field(name="Developers", value=devs, inline=False)
+		embed.add_field(name="Invite Link", value=jdata['Invite Link'] , inline=False)
+		embed.add_field(name="Website", value=jdata['Website'], inline=False)
+		embed.add_field(name="GitHub", value=jdata['GitHub'], inline=False)
+		embed.set_footer(text=f"License: {jdata['License']}")
+		await ctx.send(embed=embed)
 		
 def setup(bot):
 	bot.add_cog(Main(bot))
