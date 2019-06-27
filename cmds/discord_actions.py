@@ -6,6 +6,22 @@ import typing
 
 class DiscordActions(ExtensionBase, name="Discord Actions"):
 	"""Actions in Discord, turned to commands."""
+	@commands.command()
+	@commands.has_permissions(kick_members=True)
+	async def kick(self, ctx, members: commands.Greedy[discord.Member], reason: str = 'None'):
+		"""Kick a user from the guild with an optional reason."""
+		for m in members:
+			await m.kick(reason="Reason: {reason}\nRequested by {mod}.".format(reason=reason, mod=ctx.author))
+		await ctx.send("✅ Kicked {count} user{s} from the guild.".format(count=len(members), s='s' if len(members)>1 else ''))
+
+	@commands.command()
+	@commands.has_permissions(ban_members=True)
+	async def ban(self, ctx, members: commands.Greedy[discord.Member], reason: str = "None"):
+		"""Ban a user fron the guild with an optional reason."""
+		for m in members:
+			await m.kick(reason="Reason: {reason}\nRequested by {mod}.".format(reason=reason, mod=ctx.author))
+		await ctx.send("🔨 Banned {count} user{s} from the guild.".format(count=len(members), s='s' if len(members)>1 else ''))
+
 	@commands.group()
 	async def channel(self, ctx):
 		if ctx.invoked_subcommand: return
@@ -17,6 +33,7 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 		await ctx.send(f"#{channel.name}'s info. TODO")
 
 	@channel.command()
+	@commands.has_permissions(manage_channels=True)
 	async def create(self, ctx, ctype: str, *, name: str):
 		"""Creates a new channel."""
 		# type check

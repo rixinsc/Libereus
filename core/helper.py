@@ -146,6 +146,7 @@ async def decheck(ctx, err) -> bool:
 	if isinstance(err, discord.Forbidden):
 		log(ctx, 'err', content=tberr, reason='received 403 Forbidden')
 		await ctx.send(f"Uh-oh, seems like something unexpected happened. Consider checking my permission and then try again?")
+		return True
 	if isinstance(err, discord.HTTPException):
 		log(ctx, 'err', content=tberr, reason='an HTTP Exception occured')
 		await sendError(ctx, err, wrapped=True)
