@@ -63,9 +63,9 @@ class Automod(ExtensionBase):
 			# 	await status_msg.edit(content = status_msg_content + "\n10%")
 			# elif pos / len(guild_members) > 0.05:
 			# 	await status_msg.edit(content = status_msg_content + "\n5%")
-			if pos % 5 == 0:
-				 await status_msg.edit(content = status_msg_content + "\n{percentage}%".
-				 	format(percentage=round(pos/len(guild_members)*100)))
+			if pos % 2 == 0:
+				 await status_msg.edit(content = status_msg_content + "\n{percentage}% ({current}/{total} processed)".
+				 	format(percentage=round((pos+1)/len(guild_members)*100), current=pos+1, total=len(guild_members)))
 		# status report
 		await status_msg.edit(content = status_msg_content + "done")
 		if no_activity_members:

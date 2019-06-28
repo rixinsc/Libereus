@@ -38,7 +38,7 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 		for uid in uids:
 			user = await self.bot.fetch_user(uid)
 			await ctx.guild.ban(user, reason="(forceban) Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author), delete_message_days=0)
-		await ctx.send("🔨 Force-banned {count} user{s} from the guild.".format(count=len(uids), s='s' if len(members)>1 else ''))
+		await ctx.send("🔨 Force-banned {count} user{s} from the guild.".format(count=len(uids), s='s' if len(uids)>1 else ''))
 
 	@commands.group()
 	async def channel(self, ctx):

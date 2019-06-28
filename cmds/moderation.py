@@ -42,14 +42,15 @@ class Moderation(ExtensionBase):
 	@commands.command()
 	@commands.has_permissions(manage_roles=True)
 	async def mute(self, ctx, member: discord.Member, reason: str):
-		"""Mute (denies `Send Messages` globally in a guild) a member in the guild with an optional reason."""
-		mute_role = discord.utils.get(ctx.guild.roles, name='Mute')
+		"""Mute (denies `Send Messages` globally in a guild) a member in the guild with an optional reason.
+		As of now, it needs a role named `Muted`."""
+		mute_role = discord.utils.get(ctx.guild.roles, name='Muted')
 		if mute_role == None:
 			await ctx.send("The guild doesn't have `Mute` role !")
 		else:
 			await member.add_roles(mute_role, reason="Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author))
 			embed = discord.Embed(color=0xfa144e)
-			embed.add_field(name="Mute", value=f"{member} has been muted !")
+			embed.add_field(name="Mute", value=f"{member} has been muted!")
 			await ctx.send(embed=embed)
 
 	@commands.command()
@@ -59,7 +60,7 @@ class Moderation(ExtensionBase):
 		mute_role = discord.utils.get(ctx.guild.roles, name='Mute')
 		await member.remove_roles(mute_role)
 		embed = discord.Embed(color=0x91e873)
-		embed.add_field(name="Mute", value=f"{member} has been un-muted !")
+		embed.add_field(name="Mute", value=f"{member} has been un-muted!")
 		await ctx.send(embed=embed)
 		
 
