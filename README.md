@@ -6,7 +6,7 @@ Libereus is a Discord bot written in Python 3.6.x as a submission to participate
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
 > ✅ Disable or re-enable messaging permissions on a given channel for normal members  
-> ✅ Zalgo spam messages removal  
+> ✅ Detects bad word and give strike to the sender  
 > ✅ Remove a prefix from members' nicknames (i.e. usage of `!` to hoist to the top of the member list)  
 > ✅ 💣 GENERATE A COOL SPOILER-MINESWEEPER GAME 💣  
 > ...and much more!
@@ -32,7 +32,14 @@ It has the ability to:
 1. Add the bot into your server through the page.
 
 ### Windows
-Allan please add details
+1. Make sure you have python 3.6 installed. (Can get via [python.org](https://python.org))
+1. Download and extract or clone this repository into your computer.
+1. Create a copy of "settings_example.json" and rename it into "settings.json"
+1. Open the file through your favourite text editor (notepad may work too).
+1. These are the settings for you to tweak. Scroll to the bottom and replace "your bot token here" with the bot token you just obtained from previous step.
+1. Save it. (<kbd>Ctrl</kbd>+<kbd>S</kbd> for most cases)
+1. To run the bot, double click "bot.py" or execute it using the following command (make sure you are in the correct directory).
+`py -3 bot.py`
 
 ### 🍏 Mac
 > Unfortunately, this bot requires Python 3 but Mac OS X / macOS ships with Python 2.7 out of the box, thus you need to install Python 3 seperately to run this bot.
@@ -55,14 +62,15 @@ Allan please add details
 ### 🐧 Linux
 Follow the installation steps for "Mac" above, starting from Step 4.
 
-## Commands
+## Usage
+Run `/help` in Discord to see a list of available commands.
+All command usage information are in standard function signature syntax, which states `<>` as a required argument and `[]` as an optional argument.
+
+## Commands Showcase
 ### 🔥 Prunemembers (Lack of messages / inactive)
 ![img](https://i.imgur.com/rv4vWvW.gif)
 
 > _*If your server has hundreds or thousands of members, it may take a very long time to search.*_
-```
-/prunemembers <days> <option: include_no_message= true(1)/false(0). default=false(0)>
-```
 
 ### 📅 Calculate Date
 ![img](https://i.imgur.com/4gRlUrZ.gif)
