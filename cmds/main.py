@@ -3,9 +3,8 @@ from discord.ext import commands
 from core.scripts import dcEscape
 from core.classes import ExtensionBase
 import time, datetime, json
-# from core.classes import Whitelist
+from random import randint
 
-# new_whitelist = Whitelist()
 class Main(ExtensionBase):
 	"""Core commands for bot."""
 	@commands.command()
@@ -85,6 +84,55 @@ class Main(ExtensionBase):
 		embed.add_field(name="GitHub", value=jdata['GitHub'], inline=False)
 		embed.set_footer(text=f"License: {jdata['License']}")
 		await ctx.send(embed=embed)
+
+	@commands.command(aliases=("ms"))
+	async def minesweeper(self, ctx, width: int = 10, height: int = 10, difficulty: int = 30):
+		"""Tired of moderation? Here is a mini minesweeper game for you!
+		(PS: Don't show spoiler content to experience the fun!)
+		"""
+		grid = [['' for i in range(width)] for j in range(height)]
+		num = [':zero:',':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:']
+		msg = ''
+
+		if difficulty > 100:
+			await ctx.send("Please enter difficulty in terms of percentage (1-100).")
+			return
+		if width <= 0 or height <= 0:
+			await ctx.send("Invalid width or height value.")
+			return
+		if width * height > 160:
+			await ctx.send("Your grid size is too big.")
+			return
+		if width * height <= 4:
+			await ctx.send("Your grid size is too small.")
+			return
+		# set bombs in random location
+		for y in range(0, height):
+			for x in range(0, width):
+				if randint(0, 100) <= difficulty:
+					grid[y][x] = ':bomb:'
+
+		# now set the number emojis
+		for y in range(0, height):
+			for x in range(0, width):
+				if grid[y][x] != ':bomb:':
+					grid[y][x] = num[sum([
+						grid[y-1][x-1]==':bomb:' if y-1>=0 and x-1>=0 else False,
+						grid[y-1][x]==':bomb:' if y-1>=0 else False,
+						grid[y-1][x+1]==':bomb:' if y-1>=0 and x+1<width else False,
+						grid[y][x-1]==':bomb:' if x-1>=0 else False,
+						grid[y][x+1]==':bomb:' if x+1<width else False,
+						grid[y+1][x-1]==':bomb:' if y+1<height and x-1>=0 else False,
+						grid[y+1][x]==':bomb:' if y+1<height else False,
+						grid[y+1][x+1]==':bomb:' if y+1<height and x+1<width else False
+					])]
+
+		# generate message
+		for i in grid:
+			for tile in i:
+				msg += '||' + tile + '|| '
+			msg += '\n'
+		await ctx.send(msg)
 		
 def setup(bot):
 	bot.add_cog(Main(bot))
