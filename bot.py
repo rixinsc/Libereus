@@ -21,9 +21,6 @@ if __name__ == "__main__":
 	bot = Bot(command_prefix=commands.when_mentioned_or('//', 'libereus'), pm_help=None, loop=loop)
 	#TODO: only PM when the help msg >100 chars
 
-	with open("settings.json", "r", encoding="utf8") as file:
-		bot.settings = json.load(file, encoding='utf8')
-
 	ext_path = "cmds"
 
 	@bot.event
@@ -33,7 +30,7 @@ if __name__ == "__main__":
 	@bot.check
 	async def useable(ctx):
 		try:
-			blacklist = bot.settings['blacklist']
+			blacklist = ctx.bot.settings['blacklist']
 			if not bot.is_ready() or ctx.author.bot:
 				return False
 			elif isinstance(ctx.channel, DMChannel):
