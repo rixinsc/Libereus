@@ -1,4 +1,5 @@
 ![discord](https://discordapp.com/api/guilds/445157253385814016/widget.png?style=shield)
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 # Libereus
 Libereus is a Discord bot written in Python 3 as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
 
