@@ -46,20 +46,23 @@ class Automod(ExtensionBase):
 				inactive_members.append(member)
 			last_msgs.clear()
 			# Progress
-			if pos / len(guild_members) > 0.9:
-				await status_msg.edit(content = status_msg_content + "\n90%")
-			elif pos / len(guild_members) > 0.8:
-				await status_msg.edit(content = status_msg_content + "\n80%")
-			elif pos / len(guild_members) > 0.7:
-				await status_msg.edit(content = status_msg_content + "\n70%")
-			elif pos / len(guild_members) > 0.5:
-				await status_msg.edit(content = status_msg_content + "\n50%")
-			elif pos / len(guild_members) > 0.2:
-				await status_msg.edit(content = status_msg_content + "\n20%")
-			elif pos / len(guild_members) > 0.1:
-				await status_msg.edit(content = status_msg_content + "\n10%")
-			elif pos / len(guild_members) > 0.05:
-				await status_msg.edit(content = status_msg_content + "\n5%")
+			# if pos / len(guild_members) > 0.9:
+			# 	await status_msg.edit(content = status_msg_content + "\n90%")
+			# elif pos / len(guild_members) > 0.8:
+			# 	await status_msg.edit(content = status_msg_content + "\n80%")
+			# elif pos / len(guild_members) > 0.7:
+			# 	await status_msg.edit(content = status_msg_content + "\n70%")
+			# elif pos / len(guild_members) > 0.5:
+			# 	await status_msg.edit(content = status_msg_content + "\n50%")
+			# elif pos / len(guild_members) > 0.2:
+			# 	await status_msg.edit(content = status_msg_content + "\n20%")
+			# elif pos / len(guild_members) > 0.1:
+			# 	await status_msg.edit(content = status_msg_content + "\n10%")
+			# elif pos / len(guild_members) > 0.05:
+			# 	await status_msg.edit(content = status_msg_content + "\n5%")
+			if pos % 5 == 0:
+				 await status_msg.edit(content = status_msg_content + "\n{percentage}%".
+				 	format(percentage=round(pos/len(guild_members)*100)))
 		# status report
 		await status_msg.edit(content = status_msg_content + "done")
 		if no_activity_members:
