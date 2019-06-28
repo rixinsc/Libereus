@@ -58,7 +58,7 @@ class Main(ExtensionBase):
 		(PS: Don't show spoiler content to experience the fun!)
 		"""
 		grid = [['' for i in range(width)] for j in range(height)]
-		num = [':zero:',':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:']
+		num = ['0⃣','1⃣','2⃣','3⃣','4⃣','5⃣','6⃣','7⃣','8⃣']
 		msg = ''
 
 		if difficulty > 100:
@@ -67,31 +67,34 @@ class Main(ExtensionBase):
 		if width <= 0 or height <= 0:
 			await ctx.send("Invalid width or height value.")
 			return
-		if width * height > 160:
-			await ctx.send("Your grid size is too big.")
+		if width * height > 198:
+			# 198 is the maximum number of emojis you can send in one Discord message. 
+			# It is however undocumented by Discord, we found the number via our own research.
+			return await ctx.channel.send("Your grid size is too big.")
 			return
 		if width * height <= 4:
 			await ctx.send("Your grid size is too small.")
 			return
+		
 		# set bombs in random location
 		for y in range(0, height):
 			for x in range(0, width):
 				if randint(0, 100) <= difficulty:
-					grid[y][x] = ':bomb:'
+					grid[y][x] = '💣'
 
 		# now set the number emojis
 		for y in range(0, height):
 			for x in range(0, width):
-				if grid[y][x] != ':bomb:':
+				if grid[y][x] != '💣':
 					grid[y][x] = num[sum([
-						grid[y-1][x-1]==':bomb:' if y-1>=0 and x-1>=0 else False,
-						grid[y-1][x]==':bomb:' if y-1>=0 else False,
-						grid[y-1][x+1]==':bomb:' if y-1>=0 and x+1<width else False,
-						grid[y][x-1]==':bomb:' if x-1>=0 else False,
-						grid[y][x+1]==':bomb:' if x+1<width else False,
-						grid[y+1][x-1]==':bomb:' if y+1<height and x-1>=0 else False,
-						grid[y+1][x]==':bomb:' if y+1<height else False,
-						grid[y+1][x+1]==':bomb:' if y+1<height and x+1<width else False
+						grid[y-1][x-1]=='💣' if y-1>=0 and x-1>=0 else False,
+						grid[y-1][x]=='💣' if y-1>=0 else False,
+						grid[y-1][x+1]=='💣' if y-1>=0 and x+1<width else False,
+						grid[y][x-1]=='💣' if x-1>=0 else False,
+						grid[y][x+1]=='💣' if x+1<width else False,
+						grid[y+1][x-1]=='💣' if y+1<height and x-1>=0 else False,
+						grid[y+1][x]=='💣' if y+1<height else False,
+						grid[y+1][x+1]=='💣' if y+1<height and x+1<width else False
 					])]
 
 		# generate message
