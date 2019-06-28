@@ -40,9 +40,12 @@ class Automod(ExtensionBase):
 					last_msgs.append(last_msgs[0]) # append to the last
 				del last_msgs[0]
 			last_msg = last_msgs[0] if last_msgs else None
+			# for those didn't send a message
 			if last_msg == None and include_no_message:
 				no_activity_members.append(member)
-			elif (datetime.datetime.now() - last_msg.created_at).days > days:
+			elif last_msg == None:
+				continue
+			if (datetime.datetime.now() - last_msg.created_at).days > days:
 				inactive_members.append(member)
 			last_msgs.clear()
 			# Progress
@@ -81,7 +84,7 @@ class Automod(ExtensionBase):
 			format(rand=rand))
 		try:
 			response = await self.bot.wait_for('message', 
-				check=lambda msg: msg.author.id == ctx.author.id, 
+				check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, 
 				timeout=120.0)
 		except TimeoutError:
 			await ctx.send("Timeout reached, task cancelled.")
