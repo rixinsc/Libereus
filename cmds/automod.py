@@ -49,20 +49,6 @@ class Automod(ExtensionBase):
 				inactive_members.append(member)
 			last_msgs.clear()
 			# Progress
-			# if pos / len(guild_members) > 0.9:
-			# 	await status_msg.edit(content = status_msg_content + "\n90%")
-			# elif pos / len(guild_members) > 0.8:
-			# 	await status_msg.edit(content = status_msg_content + "\n80%")
-			# elif pos / len(guild_members) > 0.7:
-			# 	await status_msg.edit(content = status_msg_content + "\n70%")
-			# elif pos / len(guild_members) > 0.5:
-			# 	await status_msg.edit(content = status_msg_content + "\n50%")
-			# elif pos / len(guild_members) > 0.2:
-			# 	await status_msg.edit(content = status_msg_content + "\n20%")
-			# elif pos / len(guild_members) > 0.1:
-			# 	await status_msg.edit(content = status_msg_content + "\n10%")
-			# elif pos / len(guild_members) > 0.05:
-			# 	await status_msg.edit(content = status_msg_content + "\n5%")
 			if pos % 2 == 0:
 				 await status_msg.edit(content = status_msg_content + "\n{percentage}% ({current}/{total} processed)".
 				 	format(percentage=round((pos+1)/len(guild_members)*100), current=pos+1, total=len(guild_members)))
@@ -80,8 +66,8 @@ class Automod(ExtensionBase):
 		# Kicking
 		rand = randint(1000, 9999)
 		await ctx.send(
-			"<@!{uid}> Are you sure you want to kick these members?\nType `yes {rand}` or `(n)o` to cancel.".
-			format(uid= ctx.authod.id,rand=rand))
+			"<@!{uid}> Are you sure you want to kick these {count} members?\nType `yes {rand}` or `(n)o` to cancel.".
+			format(uid=ctx.author.id, count=len(no_activity_members)+len(inactive_members),rand=rand))
 		try:
 			response = await self.bot.wait_for('message', 
 				check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, 
