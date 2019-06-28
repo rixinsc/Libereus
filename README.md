@@ -20,10 +20,11 @@ It has the ability to:
 ![](https://i.imgur.com/5SSK14E.jpg)
 1. Fill in a name for your bot (or just "Libereus"), and click on Create.
 1. Click on "Bot" at the left navigation panel, and then "Add Bot".
-1. Next, click on "Click to Reveal Token" in the "Build-A-Bot" section and write down the token somewhere, it is required for the installation later. (DO NOT SHARE YOUR TOKEN WITH ANY OTHER PEOPLE, OR ANIMALS!)
+1. Next, click on "Click to Reveal Token" in the "Build-A-Bot" section and write down the token somewhere, it is required for the installation later. (DO NOT SHARE YOUR TOKEN WITH ANY OTHER PEOPLE, NOT EVEN ANIMALS!)
 1. Now click on "OAuth2" on the left navigation panel, scroll down to "Scopes" and then tick on "bot".
 1. Scroll further down to find "Bot Permissions" and check on "Administrator".
 1. You can now proceed to copy the generated link in the "Scopes" section and open the link in your web browser.
+![](https://i.imgur.com/V5kwpNN.jpg)
 1. Add the bot into your server through the page.
 
 ## Commands
