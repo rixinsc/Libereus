@@ -1,16 +1,8 @@
 {	
-  "whitelist": {	
-    "guild": [],	
-    "guildname": [],	
-    "channel": [],	
-    "channelname": [],	
-    "user": [399471491017605120, 149772971555160064, 527141732488314900, 140526642916229120, 401639653826101253],	
-    "username": ["Tansc", "Proladon", "牛奶", "NRockhouse", "RedBerrie"]	
-  },	
-  "Developers": ["Tansc#8171", "Proladon#7525","NRockhouse#4157"],
-  "Invite Link": "null",
-  "Website": "null",
-  "GitHub": "[Link](https://github.com/Tansc161/Libereus)",
-  "License": "Mozilla Public License 2.0 (MPL-2.0)",
+  "blacklist": {	
+    "guildID": [],
+    "channelID": [],
+    "userID": []
+  },
   "token": "your bot token here"
 }

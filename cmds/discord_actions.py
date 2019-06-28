@@ -35,7 +35,7 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 	@commands.command()
 	@commands.has_permissions(ban_members=True)
 	async def forceban(self, ctx, uids: commands.Greedy[int], reason: str = "N/A"):
-		"""Froce-ban user not in the guild given thier id with an optional reason."""
+		"""Force-ban user not in the guild given thier id with an optional reason."""
 		for uid in uids:
 			user = await self.bot.fetch_user(uid)
 			await ctx.guild.ban(user, reason="(forceban) Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author), delete_message_days=0)
@@ -43,6 +43,7 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 
 	@commands.group()
 	async def channel(self, ctx):
+		"""Commands regarding to guild channel's action."""
 		if ctx.invoked_subcommand is None:
 			raise commands.errors.MissingRequiredArgument(Parameter("subcommand", Parameter.POSITIONAL_OR_KEYWORD))
 
@@ -96,9 +97,10 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 		"""Alias to `channel info` command."""
 		await ctx.invoke(self.bot.get_command('channel info'), channel)
 	@commands.command(aliases=["createchnl"])
+	@commands.has_permissions(manage_channels=True)
 	async def createchannel(self, ctx, ctype: str, *, name: str):
 		"""Alias to `channel create` command."""
-		await ctx.invoke(self.bot.get_command('channel create'), channel)
+		await ctx.invoke(self.bot.get_command('channel create'), ctype, name)
 
 def setup(bot):
 	bot.add_cog(DiscordActions(bot))

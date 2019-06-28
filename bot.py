@@ -1,11 +1,12 @@
 #!/usr/bin/python3.6
 # -*- coding: utf-8 -*-
 from discord.ext import commands
-from core.helper import cmderr, eprint, sprint
+from core.helper import cmderr, sprint
 from core.classes import Bot
 import sys, os
 import asyncio
 import json
+from discord import DMChannel
 from pathlib import Path
 from fnmatch import filter
 
@@ -20,7 +21,7 @@ if __name__ == "__main__":
 	with open("settings.json", "r", encoding="utf8") as file:
 		settings = json.load(file, encoding='utf8')
 
-	bot = Bot(command_prefix=commands.when_mentioned_or('/', 'libereus'), pm_help=None, loop=loop)
+	bot = Bot(command_prefix=commands.when_mentioned_or('//', 'libereus'), pm_help=None, loop=loop)
 	#TODO: only PM when the help msg >100 chars
 
 	ext_path = "cmds"
@@ -32,17 +33,20 @@ if __name__ == "__main__":
 	@bot.check
 	async def useable(ctx):
 		try:
-			whitelist = settings['whitelist']
-			if ctx.guild is None:
+			blacklist = settings['blacklist']
+			if not bot.is_ready() or ctx.author.bot:
+				return False
+			elif isinstance(ctx.channel, DMChannel):
 				return False
 			elif ctx.author.id == bot.owner_id:
 				return True
-			elif not ((ctx.author.id in whitelist['user']) or (ctx.channel.id in whitelist['channel']) or (ctx.guild.id in whitelist['guild'])):
+			elif not ctx.channel.permissions_for(ctx.guild.me).send_messages:
+				return False
+			elif (ctx.author.id in blacklist['userID']) or (ctx.channel.id in blacklist['channelID']) or (ctx.guild.id in blacklist['guildID']):
 				return False
 			return True
 		except Exception as e:
-			eprint(e)
-			return False
+			raise RuntimeError from e
 
 	@bot.command(hidden=True)
 	@commands.is_owner()
