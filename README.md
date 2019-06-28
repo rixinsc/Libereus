@@ -1,7 +1,7 @@
 ![discord](https://discordapp.com/api/guilds/445157253385814016/widget.png?style=shield)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 # Libereus
-Libereus is a Discord bot written in Python 3 as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
+Libereus is a Discord bot written in Python 3.6.x as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
 
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
@@ -15,7 +15,7 @@ It has the ability to:
 `Tansc#8171` `Proladon#7525` `NRockhouse#4157`
 
 ## Requirements
-> 🐍 Python 3.6.x and above
+> 🐍 Python 3.6.x or above
 
 ## Installation
 ### Registering an access token for your bot
@@ -34,7 +34,7 @@ It has the ability to:
 ### Windows
 Allan please add details
 
-###  Mac
+### 🍏 Mac
 > Unfortunately, this bot requires Python 3 but Mac OS X / macOS ships with Python 2.7 out of the box, thus you need to install Python 3 seperately to run this bot.
 1. Open the "Terminal" application.
 1. Install [Homebrew](https://brew.sh/) via the following command.  
@@ -53,7 +53,7 @@ Allan please add details
 `python3 bot.py`
 
 ### 🐧 Linux
-
+Follow the installation steps for "Mac" above, starting from Step 4.
 
 ## Commands
 ### 🔥 Prunemembers (Lack of messages / inactive)
