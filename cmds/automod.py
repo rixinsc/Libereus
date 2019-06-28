@@ -74,13 +74,13 @@ class Automod(ExtensionBase):
 				format(ulist='\n'.join(['- '+str(m) for m in no_activity_members])))
 		if inactive_members:
 			await ctx.send(
-				"User that haven't send a message in {days} day{s}:\n{ulist}".
-				format(days=days, s='s' if days>1 else '', 
+				"User who haven’t sent any messages in the past {count} day{s}:\n{ulist}".
+				format(count=days, s='s' if days>1 else '', 
 					ulist='\n'.join(['- '+str(m) for m in inactive_members])))
 		# Kicking
 		rand = randint(1000, 9999)
 		await ctx.send(
-			"<@!{uid}> Are you sure want to kick those members?\nType `yes {rand}` or `(n)o` to cancel.".
+			"<@!{uid}> Are you sure you want to kick these members?\nType `yes {rand}` or `(n)o` to cancel.".
 			format(uid= ctx.authod.id,rand=rand))
 		try:
 			response = await self.bot.wait_for('message', 
