@@ -74,3 +74,7 @@ All command usage information are in standard function signature syntax, which s
 
 ### 📅 Calculate Date
 ![img](https://i.imgur.com/4gRlUrZ.gif)
+
+### 💣 Minesweeper
+![img](https://i.imgur.com/dMtjlVw.jpg)
+
