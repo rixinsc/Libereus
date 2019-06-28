@@ -7,3 +7,5 @@ Discord Hack Week rocks!
 ```
 /prunemembers <days> <option: include_no_message= true(1)/flase(0). default=flase(0) >
 ```
+
+> _*If your server has hundred or thousand members, it could be search a very longtime.*_
