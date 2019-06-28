@@ -18,11 +18,11 @@ if __name__ == "__main__":
 		loop = asyncio.get_event_loop()
 	os.chdir(Path(__file__).resolve().parent)
 
-	with open("settings.json", "r", encoding="utf8") as file:
-		settings = json.load(file, encoding='utf8')
-
 	bot = Bot(command_prefix=commands.when_mentioned_or('//', 'libereus'), pm_help=None, loop=loop)
 	#TODO: only PM when the help msg >100 chars
+
+	with open("settings.json", "r", encoding="utf8") as file:
+		bot.settings = json.load(file, encoding='utf8')
 
 	ext_path = "cmds"
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 	@bot.check
 	async def useable(ctx):
 		try:
-			blacklist = settings['blacklist']
+			blacklist = bot.settings['blacklist']
 			if not bot.is_ready() or ctx.author.bot:
 				return False
 			elif isinstance(ctx.channel, DMChannel):
@@ -53,9 +53,8 @@ if __name__ == "__main__":
 	async def reload(ctx, component: str):
 		"""Reload a component."""
 		if component == 'settings':
-			global settings
 			with open("settings.json", "r", encoding="utf8") as file:
-				settings = json.load(file, encoding='utf8')
+				ctx.bot.settings = json.load(file, encoding='utf8')
 			await ctx.send('Reloaded settings.')
 			return
 		await wildcardCheck(ctx, "reload", component)
@@ -108,4 +107,4 @@ if __name__ == "__main__":
 			name = file[:-3]
 			bot.load_extension(f"{ext_path}.{name}")
 
-	bot.run(settings['token'])
+	bot.run(bot.settings['token'])

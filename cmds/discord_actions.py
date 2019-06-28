@@ -92,6 +92,11 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 			discord_Forbidden='r'+'I do not have the required permission to create a new channel. Please give me the `Manage Channel` permission and try again.',
 			discord_HTTPException='r'+"Creating the channel failed. Please try again later.")
 
+	@channel.command()
+	@commands.has_permissions(manage_channels=True)
+	async def slowmode(self, ctx, channels: commands.Greedy[discord.TextChannel] = None, seconds: int = 10, reason: str = "N/A"):
+		"""Alias to `slowmode` command."""
+		await ctx.invoke(self.bot.get_command('slowmode'), channels, seconds, reason)
 	@commands.command()
 	async def channelinfo(self, ctx, channel: typing.Union[discord.TextChannel, discord.VoiceChannel, discord.CategoryChannel] = None):
 		"""Alias to `channel info` command."""

@@ -4,5 +4,8 @@
     "channelID": [],
     "userID": []
   },
+  "moderation": {
+  	"hoisting characters": ["!", " ", "\"", "$", "'", "(", ",", "-", ".", "/"]
+  },
   "token": "your bot token here"
 }

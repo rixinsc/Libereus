@@ -45,7 +45,7 @@ class Automod(ExtensionBase):
 				no_activity_members.append(member)
 			elif last_msg == None:
 				continue
-			if (datetime.datetime.now() - last_msg.created_at).days > days:
+			elif (datetime.datetime.now() - last_msg.created_at).days > days:
 				inactive_members.append(member)
 			last_msgs.clear()
 			# Progress
@@ -65,9 +65,15 @@ class Automod(ExtensionBase):
 					ulist='\n'.join(['- '+str(m) for m in inactive_members])))
 		# Kicking
 		rand = randint(1000, 9999)
-		await ctx.send(
-			"<@!{uid}> Are you sure you want to kick these {count} members?\nType `yes {rand}` or `(n)o` to cancel.".
-			format(uid=ctx.author.id, count=len(no_activity_members)+len(inactive_members),rand=rand))
+		count = len(no_activity_members)+len(inactive_members)
+		if count != 0:
+			await ctx.send(
+				"<@!{uid}> Are you sure you want to kick these {count} members?\nType `yes {rand}` or `(n)o` to cancel.".
+				format(uid=ctx.author.id, count=len(no_activity_members)+len(inactive_members),rand=rand))
+		else:
+			await ctx.send("{mention} There're currently no inactive user, good job!".
+				format(mention=ctx.author.mention))
+			return
 		try:
 			response = await self.bot.wait_for('message', 
 				check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, 
