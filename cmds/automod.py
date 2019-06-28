@@ -80,8 +80,8 @@ class Automod(ExtensionBase):
 		# Kicking
 		rand = randint(1000, 9999)
 		await ctx.send(
-			"Are you sure want to kick those members?\nType `yes {rand}` or `(n)o` to cancel.".
-			format(rand=rand))
+			"<@!{uid}> Are you sure want to kick those members?\nType `yes {rand}` or `(n)o` to cancel.".
+			format(uid= ctx.authod.id,rand=rand))
 		try:
 			response = await self.bot.wait_for('message', 
 				check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, 
