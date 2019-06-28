@@ -30,9 +30,13 @@ class Main(ExtensionBase):
 	@commands.command()
 	async def calcdate(self, ctx, day: int):
 		"""Add or subtract given day count by today and return."""
+		td = datetime.datetime.now()
 		today = datetime.date.today()
 		tdelta = datetime.timedelta(days=day)
-		await ctx.channel.send(today + tdelta)
+		result = today + tdelta
+		dt = datetime.datetime.combine(result, td.time())
+		embed = discord.Embed(timestamp=dt)
+		await ctx.channel.send(embed=embed)
 
 	@commands.command()
 	async def info(self, ctx):
