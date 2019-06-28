@@ -1,3 +1,4 @@
+![discord](https://discordapp.com/api/guilds/445157253385814016/widget.png?style=shield)
 # Libereus
 Discord Hack Week rocks!
 
