@@ -14,6 +14,9 @@ It has the ability to:
 ## Developers
 `Tansc#8171` `Proladon#7525` `NRockhouse#4157`
 
+## Requirements
+> 🐍 Python 3.7
+
 ## Installation
 ### Registering an access token for your bot
 1. Navigate to [Discord Developer Portal (Applications)](https://discordapp.com/developers/applications/).
@@ -27,6 +30,21 @@ It has the ability to:
 1. You can now proceed to copy the generated link in the "Scopes" section and open the link in your web browser.
 ![](https://i.imgur.com/V5kwpNN.jpg)
 1. Add the bot into your server through the page.
+
+### Windows
+Allan please add details
+
+###  Mac
+> Unfortunately, this bot requires Python 3 but Mac OS X / macOS ships with Python 2.7 out of the box, thus you need to install Python 3 seperately to run this bot.
+1. Open the "Terminal" application.
+1. Install [Homebrew](https://brew.sh/) via the following command.  
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+1. Install Python 3 by entering the command.  
+`brew install python3`
+1. 
+
+### 🐧 Linux
+
 
 ## Commands
 ### 🔥 Prunemembers (Lack of messages / inactive)
