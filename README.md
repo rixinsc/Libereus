@@ -12,7 +12,7 @@ It has the ability to:
 > ...and much more!
 
 ## Developers
-`Tansc#8171` `Proladon#7525` `NRockhouse#4157`
+`Tansc#8171` `Proladon#7525` `NRockhouse#4157` `RedBerrie#3324` `翠梦#8926`
 
 ## Requirements
 > 🐍 Python 3.6.x or above
@@ -32,11 +32,11 @@ It has the ability to:
 1. Add the bot into your server through the page.
 
 ### Windows
-1. Make sure you have python 3.6 installed. (Can get via [python.org](https://python.org))
+1. Make sure you have Python 3.6 installed. (Download it via [python.org](https://python.org))
 1. Download and extract or clone this repository into your computer.
 1. Create a copy of "settings_example.json" and rename it into "settings.json"
-1. Open the file through your favourite text editor (notepad may work too).
-1. These are the settings for you to tweak. Scroll to the bottom and replace "your bot token here" with the bot token you just obtained from previous step.
+1. Open the file through your favourite text editor (Notepad may work too).
+1. These are the settings for you to tweak. Scroll to the bottom and replace "your bot token here" with the bot token you just obtained from the previous step.
 1. Save it. (<kbd>Ctrl</kbd>+<kbd>S</kbd> for most cases)
 1. To run the bot, double click "bot.py" or execute it using the following command (make sure you are in the correct directory).
 `py -3 bot.py`
@@ -55,7 +55,7 @@ It has the ability to:
 1. Use your favourite text editor to edit settings.json or use nano in the Terminal.  
 `nano settings.json`
 1. Replace "your bot token here" with the bot token that you obtained from Step 5 in "Registering an access token for your bot" above. (Please note that you need to enclose your bot token with "quotation marks".)
-1. Save the file. (For nano users, press Ctrl+X, and then hit Y, and then hit Enter.)
+1. Save the file. (For nano users, press <kbd>Ctrl</kbd>+<kbd>X</kbd>, and then hit <kbd>Y</kbd>, and then hit <kbd>Enter</kbd>.)
 1. Run the bot with the following command.  
 `python3 bot.py`
 
