@@ -1,6 +1,9 @@
 # Libereus
 Discord Hack Week rocks!
 
+#### Developers
+`Tansc#8171` `Proladon#7525` `NRockhouse#4157`
+
 # Feature
 ### 🔥 Prunemembers (No message & active)
 ![img](https://i.imgur.com/rv4vWvW.gif)
