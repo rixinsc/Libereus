@@ -15,7 +15,7 @@ It has the ability to:
 `Tansc#8171` `Proladon#7525` `NRockhouse#4157`
 
 ## Requirements
-> 🐍 Python 3.7
+> 🐍 Python 3.6.x and above
 
 ## Installation
 ### Registering an access token for your bot
@@ -41,7 +41,16 @@ Allan please add details
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 1. Install Python 3 by entering the command.  
 `brew install python3`
-1. 
+1. Clone this repository's master branch.  
+`git clone https://github.com/Tansc161/Libereus.git --branch master`
+1. Make a copy of settings.json from the example given.  
+`cp settings_example.json settings.json`
+1. Use your favourite text editor to edit settings.json or use nano in the Terminal.  
+`nano settings.json`
+1. Replace "your bot token here" with the bot token that you obtained from Step 5 in "Registering an access token for your bot" above. (Please note that you need to enclose your bot token with "quotation marks".)
+1. Save the file. (For nano users, press Ctrl+X, and then hit Y, and then hit Enter.)
+1. Run the bot with the following command.  
+`python3 bot.py`
 
 ### 🐧 Linux
 
