@@ -45,7 +45,7 @@ class Main(ExtensionBase):
 		embed.add_field(name="Developers", value=
 			"Tansc#8171 (<@!399471491017605120>)\nProladon#7525 (<@!149772971555160064>)\nNRockhouse#4157 (<@!140526642916229120>)", 
 			inline=False)
-		embed.add_field(name="Support Server", value="*None currently*" , inline=False)
+		embed.add_field(name="Support Server", value="[Link](https://lihi1.cc/j2C5r)" , inline=False)
 		embed.add_field(name="Source", value="[Link](https://github.com/Tansc161/Libereus)", inline=True)
 		embed.add_field(name="License", value="Mozilla Public License 2.0", inline=True)
 		embed.set_footer(text="Made with ❤")
