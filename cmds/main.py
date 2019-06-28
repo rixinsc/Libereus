@@ -85,7 +85,7 @@ class Main(ExtensionBase):
 		embed.set_footer(text=f"License: {jdata['License']}")
 		await ctx.send(embed=embed)
 
-	@commands.command(aliases=("ms"))
+	@commands.command(aliases=["ms"])
 	async def minesweeper(self, ctx, width: int = 10, height: int = 10, difficulty: int = 30):
 		"""Tired of moderation? Here is a mini minesweeper game for you!
 		(PS: Don't show spoiler content to experience the fun!)
