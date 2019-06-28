@@ -20,7 +20,7 @@ if __name__ == "__main__":
 	with open("settings.json", "r", encoding="utf8") as file:
 		settings = json.load(file, encoding='utf8')
 
-	bot = Bot(command_prefix=commands.when_mentioned_or('/', 'libereus'), pm_help=None, loop=loop)
+	bot = Bot(command_prefix=commands.when_mentioned_or('[', 'libereus'), pm_help=None, loop=loop)
 	#TODO: only PM when the help msg >100 chars
 
 	ext_path = "cmds"
