@@ -1,9 +1,14 @@
-from discord.ext import commands
+from discord.ext import commands, tasks
 from core.classes import ExtensionBase
+from core.helper import eprint
 import discord
 
 class Moderation(ExtensionBase):
 	"""Moderation commands."""
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.strikeReset.start()
+
 	@commands.command()
 	@commands.has_permissions(manage_roles=True)
 	async def lockdown(self, ctx, channels: commands.Greedy[discord.TextChannel] = None, reason: str = 'N/A'):
@@ -78,7 +83,7 @@ class Moderation(ExtensionBase):
 		count = 0
 		for m in members:
 			if m.display_name.startswith(hoist_chars):
-				await m.edit(nick=f"{m.display_name}x".strip(hoist_chars)[:-1])
+				await m.edit(nick=f"{m.display_name}x".strip(''.join(hoist_chars))[:-1])
 				count += 1
 		await status_msg.edit(content="✅ Removed hoisting characters for {count} member{s}.".
 			format(count=count, s='s' if count>1 else ''))
