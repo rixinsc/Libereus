@@ -38,8 +38,11 @@ It has the ability to:
 1. Open the file through your favourite text editor (Notepad may work too).
 1. These are the settings for you to tweak. Scroll to the bottom and replace "your bot token here" with the bot token you just obtained from the previous step.
 1. Save it. (<kbd>Ctrl</kbd>+<kbd>S</kbd> for most cases)
+1. Now open up the Command Prompt by pressing <kbd>Win</kbd>+<kbd>R</kbd>, type in `cmd`, and then press the "OK" button.
+1. In the black Command Prompt window, type in the following command. (Make sure you use `cd <your bot folder directory>` to navigate to your folder beforehand).
+`pip3 install -r requirements.txt`
 1. To run the bot, double click "bot.py" or execute it using the following command (make sure you are in the correct directory).
-`py -3 bot.py`
+`py -3.6 bot.py`
 
 ### 🍏 Mac
 > Unfortunately, this bot requires Python 3 but Mac OS X / macOS ships with Python 2.7 out of the box, thus you need to install Python 3 seperately to run this bot.
@@ -56,6 +59,8 @@ It has the ability to:
 `nano settings.json`
 1. Replace "your bot token here" with the bot token that you obtained from Step 5 in "Registering an access token for your bot" above. (Please note that you need to enclose your bot token with "quotation marks".)
 1. Save the file. (For nano users, press <kbd>Ctrl</kbd>+<kbd>X</kbd>, and then hit <kbd>Y</kbd>, and then hit <kbd>Enter</kbd>.)
+1. Now run this command to install the Python libraries required for the bot.
+`pip3 install -r requirements.txt`
 1. Run the bot with the following command.  
 `python3 bot.py`
 
