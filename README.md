@@ -5,7 +5,7 @@ Libereus is a Discord bot written in Python 3.6 as a submission to participate i
 
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
-> ✅ Disable or re-enable messaging permissions on a given channel for normal members  
+> ✅ Disable or re-enable messaging permissions on a given channel for normal members (channel lockdown)  
 > ✅ Detects bad word and give strike to the sender  
 > ✅ Remove a prefix from members' nicknames (i.e. usage of `!` to hoist to the top of the member list)  
 > ✅ 💣 GENERATE A COOL SPOILER-MINESWEEPER GAME 💣  
