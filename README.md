@@ -1,7 +1,7 @@
 ![discord](https://lihi1.cc/7CBE7)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 # Libereus
-Libereus is a Discord bot written in Python 3.6.x as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
+Libereus is a Discord bot written in Python 3.6 as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
 
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
@@ -11,11 +11,11 @@ It has the ability to:
 > ✅ 💣 GENERATE A COOL SPOILER-MINESWEEPER GAME 💣  
 > ...and much more!
 
-## Developers
+## Team Members
 `Tansc#8171` `Proladon#7525` `NRockhouse#4157` `RedBerrie#3324` `翠梦#8926`
 
 ## Requirements
-> 🐍 Python 3.6.x or above
+> 🐍 Python 3.6 or above
 
 ## Installation
 ### Registering an access token for your bot
