@@ -1,13 +1,9 @@
-from discord.ext import commands, tasks
+from discord.ext import commands
 from core.classes import ExtensionBase
-from core.helper import eprint
 import discord
 
 class Moderation(ExtensionBase):
 	"""Moderation commands."""
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		self.strikeReset.start()
 
 	@commands.command()
 	@commands.has_permissions(manage_roles=True)

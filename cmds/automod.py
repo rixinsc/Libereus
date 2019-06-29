@@ -1,6 +1,6 @@
-from discord.ext import commands
+from discord.ext import commands, tasks
 from core.classes import ExtensionBase
-from core.helper import log, cmderr
+from core.helper import log, cmderr, eprint
 import discord
 from random import randint
 import datetime
