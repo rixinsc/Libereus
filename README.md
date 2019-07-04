@@ -73,12 +73,12 @@ All command usage information are in standard function signature syntax, which s
 
 ## Commands Showcase
 ### 🔥 Prunemembers (Lack of messages / inactive)
-![img](https://i.imgur.com/rv4vWvW.gif)
+![img](https://i.imgur.com/laXxdgH.gif)
 
 > _*If your server has hundreds or thousands of members, it may take a very long time to search.*_
 
 ### 📅 Calculate Date
-![img](https://i.imgur.com/4gRlUrZ.gif)
+![img](https://i.imgur.com/qpIsyDg.gif)
 
 ### 💣 Minesweeper
 ![img](https://i.imgur.com/dMtjlVw.jpg)
