@@ -73,7 +73,7 @@ All command usage information are in standard function signature syntax, which s
 
 ## Commands Showcase
 ### 🔥 Prunemembers (Lack of messages / inactive)
-![img](https://i.imgur.com/laXxdgH.gif)
+![img](https://i.imgur.com/xIf3F05.gif)
 
 > _*If your server has hundreds or thousands of members, it may take a very long time to search.*_
 
