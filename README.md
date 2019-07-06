@@ -3,6 +3,10 @@
 # Libereus
 Libereus is a Discord bot written in Python 3.6 as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
 
+##### Update:
+The judgement phase is over,  and we got **second place**! Full results can be see [here](https://blog.discordapp.com/discord-community-hack-week-category-winners-bd0364360f92).
+Thanks everyone for your support and we look forward to make Libereus better as time goes on! 🤗
+
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
 > ✅ Disable or re-enable messaging permissions on a given channel for normal members (channel lockdown)  
@@ -15,7 +19,7 @@ It has the ability to:
 `Tansc#8171` `Proladon#7525` `NRockhouse#4157` `RedBerrie#3324` `翠梦#8926`
 
 ## Requirements
-> 🐍 Python 3.6 or above
+> 🐍 Python 3.4 or above (Python 3.6 recommended)
 
 ## Installation
 ### Registering an access token for your bot
@@ -32,7 +36,7 @@ It has the ability to:
 1. Add the bot into your server through the page.
 
 ### Windows
-1. Make sure you have Python 3.6 installed. (Download it via [python.org](https://python.org))
+1. Make sure you have Python 3 installed (We recommend python 3.6). (Download it via [python.org](https://python.org))
 1. Download and extract or clone this repository into your computer.
 1. Create a copy of "settings_example.json" and rename it into "settings.json"
 1. Open the file through your favourite text editor (Notepad may work too).
@@ -41,8 +45,8 @@ It has the ability to:
 1. Now open up the Command Prompt by pressing <kbd>Win</kbd>+<kbd>R</kbd>, type in `cmd`, and then press the "OK" button.
 1. In the black Command Prompt window, type in the following command. (Make sure you use `cd <your bot folder directory>` to navigate to your folder beforehand).  
 `pip3 install -r requirements.txt`
-1. To run the bot, double click "bot.py" or execute it using the following command (make sure you are in the correct directory).  
-`py -3.6 bot.py`
+1. To run the bot, double click "bot.py" or do the following command in the bot's directory.
+`py -3 bot.py`
 
 ### 🍏 Mac
 > Unfortunately, this bot requires Python 3 but Mac OS X / macOS ships with Python 2.7 out of the box, thus you need to install Python 3 seperately to run this bot.
