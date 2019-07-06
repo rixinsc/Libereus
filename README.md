@@ -1,11 +1,9 @@
-![discord](https://lihi1.cc/7CBE7)
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+![Libereus Banner](https://sc.s-ul.eu/nWBPZuZ6)
 # Libereus
-Libereus is a Discord bot written in Python 3.6 as a submission to participate in the Moderation category of [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33).
+[![discord](https://lihi1.cc/7CBE7)](https://lihi1.cc/j2C5r)
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-367/)
 
-##### Update:
-The judgement phase is over,  and we got **second place**! Full results can be see [here](https://blog.discordapp.com/discord-community-hack-week-category-winners-bd0364360f92).
-Thanks everyone for your support and we look forward to make Libereus better as time goes on! 🤗
+Libereus is a self-hosted only Discord moderation bot written in Python 3.6 that aims to let server moderator lives better, initially created as a submission to participate in [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33) and got [second place](https://blog.discordapp.com/discord-community-hack-week-category-winners-bd0364360f92). Our original submission can be found [here](https://github.com/Tansc161/Libereus-DHW19).
 
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
@@ -14,9 +12,6 @@ It has the ability to:
 > ✅ Remove a prefix from members' nicknames (i.e. usage of `!` to hoist to the top of the member list)  
 > ✅ 💣 GENERATE A COOL SPOILER-MINESWEEPER GAME 💣  
 > ...and much more!
-
-## Team Members
-`Tansc#8171` `Proladon#7525` `NRockhouse#4157` `RedBerrie#3324` `翠梦#8926`
 
 ## Requirements
 > 🐍 Python 3.4 or above (Python 3.6 recommended)
@@ -36,7 +31,7 @@ It has the ability to:
 1. Add the bot into your server through the page.
 
 ### Windows
-1. Make sure you have Python 3 installed (We recommend python 3.6). (Download it via [python.org](https://python.org))
+1. Make sure you have Python 3 installed (We recommend python 3.6). (Download it via [python.org](https://www.python.org/downloads/release/python-367/))
 1. Download and extract or clone this repository into your computer.
 1. Create a copy of "settings_example.json" and rename it into "settings.json"
 1. Open the file through your favourite text editor (Notepad may work too).
@@ -74,6 +69,15 @@ Follow the installation steps for "Mac" above, starting from Step 4.
 ## Usage
 Run `/help` in Discord to see a list of available commands.
 All command usage information are in standard function signature syntax, which states `<>` as a required argument and `[]` as an optional argument.
+
+## Developers & Contributors
+[rixinsc](https://github.com/Tansc161) `Tansc#8171` [Lead Dev & Founder]
+
+[Proladon](https://github.com/Proladon) `Proladon#7525` [Dev]
+
+[NRockhouse](https://github.com/NRockhouse) `NRockhouse#4157` [Dev & QA]
+
+RedBerrie `RedBerrie#3324` [QA]
 
 ## Commands Showcase
 ### 🔥 Prunemembers (Lack of messages / inactive)
