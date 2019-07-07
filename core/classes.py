@@ -19,6 +19,6 @@ class Bot(commands.AutoShardedBot):
 	@settings.setter
 	def settings(self, obj):
 		self._settings = obj
-		with open("settings.json", "r+", encoding="utf8") as file:
+		with open("settings.json", "w", encoding="utf8") as file:
 			file.seek(0, 0)
 			json.dump(obj, file, indent=4)

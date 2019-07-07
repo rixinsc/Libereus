@@ -128,18 +128,22 @@ class Automod(ExtensionBase):
 			'\u2006', '\u2007', '\u2008', '\u2009', '\u200a', '\u200b', '\u202f', '\u205f', '\u3000', '\u2800')
 		symbols = ('.', '-', '_', '`', '~', ":", '/', '\\', ';', '+', '(', ')', '*', '^')
 		special_words = []
-		settings = self.bot.settings['moderation']['word filter']
+		settings = self.bot.settings['moderation']['word filter'].copy()
 
 		if not settings['enabled']:
+			return
+		elif message.author == self.bot.user:
 			return
 		if settings['threshold'] < 1:
 			eprint("Invalid threshold set({value}), value must be larger than 0.".
 				format(value=settings['threshold']))
 			return
 
-		settings['words'] = tuple(set(settings['words'])) # Make element unique
+		settings['words'] = list(set(settings['words'])) # Make element unique
 		# Separate precise entries from words list
-		for i, word in emumerate(settings['words']):
+		for i, word in enumerate(settings['words']):
+			word = word.lower()
+			settings['words'][i] = word
 			for space in spaces:
 				if (space in word) and (word not in special_words):
 					special_words.append(word)
@@ -150,7 +154,7 @@ class Automod(ExtensionBase):
 					special_words.append(word)
 					del settings['words'][i]
 
-		content = message.content
+		content = message.content.lower()
 		# filter out possible seperator
 		for c in spaces:
 			content = content.replace(c, '')
@@ -162,7 +166,7 @@ class Automod(ExtensionBase):
 		words = settings['words']
 		striked = False
 		for spword in special_words:
-			if spword in message.content:
+			if spword in message.content.lower():
 				striked = True
 				strikes[message.author] += 1
 				break
@@ -172,15 +176,15 @@ class Automod(ExtensionBase):
 					striked = True
 					strikes[message.author] += 1
 					break
+		if striked:
+			await message.channel.send("🛑 {mention}, usage of bad word is not tolerated at here!".
+				format(mention=message.author.mention))
 		if strikes[message.author] >= settings['threshold']:
 			if settings['action'].lower() == 'kick':
 				await message.author.kick(reason="User exceeded word filter's limit | By Automod")
 				strikes[message.author] = 0
 			elif settings['action'].lower() == 'ban':
 				await message.author.ban(reason="User exceeded word filter's limit | By Automod")
-		elif striked:
-			await message.channel.send("🛑 {mention}, usage of bad word is not tolerated at here!".
-				format(mention=message.author.mention))
 	@tasks.loop(hours=24)
 	async def strikeReset(self):
 		global strikes
