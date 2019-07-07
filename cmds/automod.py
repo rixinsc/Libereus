@@ -123,40 +123,64 @@ class Automod(ExtensionBase):
 		await ctx.send("Changed word filter status to {status}.".format(status=status))
 	@commands.Cog.listener('on_message')
 	async def liveWordFilter(self, message):
-		special_spaces = ('\u0020', '\u00a0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004', '\u2005', 
+		global strikes
+		spaces = ('\u0020', '\u00a0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004', '\u2005', 
 			'\u2006', '\u2007', '\u2008', '\u2009', '\u200a', '\u200b', '\u202f', '\u205f', '\u3000', '\u2800')
 		symbols = ('.', '-', '_', '`', '~', ":", '/', '\\', ';', '+', '(', ')', '*', '^')
-		global strikes
-		if self.bot.settings['moderation']['word filter']['threshold'] < 1:
-			eprint("Invalid threshold set({value}), value must be larger than 1.".
-				format(value=self.bot.settings['moderation']['word filter']['threshold']))
+		special_words = []
+		settings = self.bot.settings['moderation']['word filter']
+
+		if not settings['enabled']:
 			return
-		if self.bot.settings['moderation']['word filter']['enabled']:
-			content = message.content
-			# filter out possible seperator
-			for c in special_spaces:
-				content = content.replace(c, '')
-			for s in symbols:
-				content = content.replace(s, '')
-			# detect bad word(s)
-			if strikes.get(message.author, None) is None:
-				strikes[message.author] = 0
-			words = self.bot.settings['moderation']['word filter']['words']
-			striked = False
+		if settings['threshold'] < 1:
+			eprint("Invalid threshold set({value}), value must be larger than 0.".
+				format(value=settings['threshold']))
+			return
+
+		settings['words'] = tuple(set(settings['words'])) # Make element unique
+		# Separate precise entries from words list
+		for i, word in emumerate(settings['words']):
+			for space in spaces:
+				if (space in word) and (word not in special_words):
+					special_words.append(word)
+					del settings['words'][i]
+					continue
+			for symbol in symbols:
+				if (symbol in word) and (word not in special_words):
+					special_words.append(word)
+					del settings['words'][i]
+
+		content = message.content
+		# filter out possible seperator
+		for c in spaces:
+			content = content.replace(c, '')
+		for s in symbols:
+			content = content.replace(s, '')
+		# detect bad word(s)
+		if strikes.get(message.author, None) is None:
+			strikes[message.author] = 0
+		words = settings['words']
+		striked = False
+		for spword in special_words:
+			if spword in message.content:
+				striked = True
+				strikes[message.author] += 1
+				break
+		if not striked:
 			for word in words:
 				if word in content:
 					striked = True
 					strikes[message.author] += 1
 					break
-			if strikes[message.author] >= self.bot.settings['moderation']['word filter']['threshold']:
-				if self.bot.settings['moderation']['word filter']['action'].lower() == 'kick':
-					await message.author.kick(reason="User exceeded word filter's limit | By Automod")
-					strikes[message.author] = 0
-				elif self.bot.settings['moderation']['word filter']['action'].lower() == 'ban':
-					await message.author.ban(reason="User exceeded word filter's limit | By Automod")
-			elif striked:
-				await message.channel.send("🛑 {mention}, usage of bad word is not tolerated at here!".
-					format(mention=message.author.mention))
+		if strikes[message.author] >= settings['threshold']:
+			if settings['action'].lower() == 'kick':
+				await message.author.kick(reason="User exceeded word filter's limit | By Automod")
+				strikes[message.author] = 0
+			elif settings['action'].lower() == 'ban':
+				await message.author.ban(reason="User exceeded word filter's limit | By Automod")
+		elif striked:
+			await message.channel.send("🛑 {mention}, usage of bad word is not tolerated at here!".
+				format(mention=message.author.mention))
 	@tasks.loop(hours=24)
 	async def strikeReset(self):
 		global strikes
