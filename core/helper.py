@@ -119,8 +119,8 @@ async def decheck(ctx, err) -> bool:
 	if isinstance(err, exceptions.CommandErrorHandled):
 		log(ctx, 'err', content=notberr)
 		return True
-	if isinstance(err, commands.errors.CheckFailure): #when command check fail
-		log(ctx, 'err', content=notberr, reason='failing command check') #No traceback
+	if isinstance(err, commands.errors.CheckFailure): # when command check fail
+		log(ctx, 'err', content=notberr, reason='failing command check') # No traceback
 		await ctx.send('You do not have permission to execute this command.')
 		return True
 	if isinstance(err, commands.errors.MissingPermissions):
@@ -237,10 +237,10 @@ def log(ctx=None, type:str='debug', **kwargs) -> None:
 		sprint("Debug: {}".format(kwargs.get('content','')))
 
 try:
-	bmp_support = True
+	non_bmp_map = None
 	print("Console support non-bmp character. \U0001f389")
 except UnicodeEncodeError:
-	bmp_support = False
+	non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 	# Compat with python IDLE
 	print("Console only support bmp character. All non-bmp character will be translated to the replacement character (U+FFFD).")
 
@@ -248,9 +248,8 @@ def tsl(text: str) -> str:
 	"""
 	Translate characters that python can't handle to codepoints.
 	"""
-	global bmp_support
-	if not bmp_support:
-		non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
+	global non_bmp_map
+	if non_bmp_map is not None:
 		return str(text).translate(non_bmp_map)
 	else:
 		return str(text)
