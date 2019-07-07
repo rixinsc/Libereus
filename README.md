@@ -33,7 +33,7 @@ It has the ability to:
 ### Windows
 1. Make sure you have Python 3 installed (We recommend python 3.6). (Download it via [python.org](https://www.python.org/downloads/release/python-367/))
 1. Download and extract or clone this repository into your computer.
-1. Create a copy of "settings_example.json" and rename it into "settings.json"
+1. Create a copy of "settings.example.json" and rename it into "settings.json"
 1. Open the file through your favourite text editor (Notepad may work too).
 1. These are the settings for you to tweak. Scroll to the bottom and replace "your bot token here" with the bot token you just obtained from the previous step.
 1. Save it. (<kbd>Ctrl</kbd>+<kbd>S</kbd> for most cases)
@@ -53,7 +53,7 @@ It has the ability to:
 1. Clone this repository's master branch.  
 `git clone https://github.com/Tansc161/Libereus.git --branch master`
 1. Make a copy of settings.json from the example given.  
-`cp settings_example.json settings.json`
+`cp settings.example.json settings.json`
 1. Use your favourite text editor to edit settings.json or use nano in the Terminal.  
 `nano settings.json`
 1. Replace "your bot token here" with the bot token that you obtained from Step 5 in "Registering an access token for your bot" above. (Please note that you need to enclose your bot token with "quotation marks".)
