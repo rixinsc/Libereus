@@ -25,7 +25,7 @@ class Main(ExtensionBase):
 		"""Say something."""
 		msg = content.strip() #Remove whitespaces
 		await ctx.send(dcEscape(msg, 'ping'))
-		#TODO: Check perms before @everyone or @here
+		# TODO: Check perms before @everyone or @here
 
 	@commands.command()
 	async def calcdate(self, ctx, day: int):
@@ -38,14 +38,15 @@ class Main(ExtensionBase):
 		embed = discord.Embed(timestamp=dt)
 		await ctx.channel.send(embed=embed)
 
-	@commands.command()
+	@commands.command(aliases=['about'])
 	async def info(self, ctx):
 		embed = discord.Embed(title="About Libereus", description="Moderation made easy.")
 		embed.set_thumbnail(url="https://sc.s-ul.eu/FEYj6UQg")
 		embed.add_field(name="Developers", value=
 			"Tansc#8171 (<@!399471491017605120>)\nProladon#7525 (<@!149772971555160064>)\nNRockhouse#4157 (<@!140526642916229120>)", 
 			inline=False)
-		embed.add_field(name="Support Server", value="[Link](https://lihi1.cc/j2C5r)" , inline=False)
+		embed.add_field(name="Support Server", value="[Link](https://lihi1.cc/j2C5r)" , inline=True)
+		embed.add_field(name="Powered by", value="discord.py v{}".format(discord.__version__), inline=True)
 		embed.add_field(name="Source", value="[Link](https://github.com/Tansc161/Libereus)", inline=True)
 		embed.add_field(name="License", value="Mozilla Public License 2.0", inline=True)
 		embed.set_footer(text="Made with ❤")
@@ -57,8 +58,8 @@ class Main(ExtensionBase):
 		"""Tired of moderation? Here is a mini minesweeper game for you!
 		(PS: Don't show spoiler content to experience the fun!)
 		"""
-		grid = [['' for i in range(width)] for j in range(height)]
-		num = ['0⃣','1⃣','2⃣','3⃣','4⃣','5⃣','6⃣','7⃣','8⃣']
+		grid = tuple([['' for i in range(width)] for j in range(height)])
+		num = ('0⃣','1⃣','2⃣','3⃣','4⃣','5⃣','6⃣','7⃣','8⃣')
 		msg = ''
 
 		if difficulty > 100:
@@ -86,7 +87,7 @@ class Main(ExtensionBase):
 		for y in range(0, height):
 			for x in range(0, width):
 				if grid[y][x] != '💣':
-					grid[y][x] = num[sum([
+					grid[y][x] = num[sum((
 						grid[y-1][x-1]=='💣' if y-1>=0 and x-1>=0 else False,
 						grid[y-1][x]=='💣' if y-1>=0 else False,
 						grid[y-1][x+1]=='💣' if y-1>=0 and x+1<width else False,
@@ -95,7 +96,7 @@ class Main(ExtensionBase):
 						grid[y+1][x-1]=='💣' if y+1<height and x-1>=0 else False,
 						grid[y+1][x]=='💣' if y+1<height else False,
 						grid[y+1][x+1]=='💣' if y+1<height and x+1<width else False
-					])]
+					))]
 
 		# generate message
 		for i in grid:

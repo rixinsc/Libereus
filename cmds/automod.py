@@ -155,7 +155,7 @@ class Automod(ExtensionBase):
 				elif self.bot.settings['moderation']['word filter']['action'].lower() == 'ban':
 					await message.author.ban(reason="User exceeded word filter's limit | By Automod")
 			elif striked:
-				await message.channel.send("🛑 {mention}, usage of bad word are not tolerated at here!".
+				await message.channel.send("🛑 {mention}, usage of bad word is not tolerated at here!".
 					format(mention=message.author.mention))
 	@tasks.loop(hours=24)
 	async def strikeReset(self):

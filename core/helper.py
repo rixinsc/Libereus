@@ -233,7 +233,7 @@ def log(ctx=None, type:str='debug', **kwargs) -> None:
 			.format(' because '+kwargs.get('reason','')), (
 				content if content.endswith('\n') else content + '\n'
 				))
-	elif type == "debug" or type == "db":
+	elif type == "debug" or type == "d":
 		sprint("Debug: {}".format(kwargs.get('content','')))
 
 try:
