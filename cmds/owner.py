@@ -7,7 +7,7 @@ import time
 import asyncio
 import discord # for eval use, don't remove
 
-class Owner(ExtensionBase, command_attrs={"hidden":True}):
+class Owner(ExtensionBase):
 	"""Owner commands."""
 	async def cog_check(self, ctx):
 		if not await ctx.bot.is_owner(ctx.author):
