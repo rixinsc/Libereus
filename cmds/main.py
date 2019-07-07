@@ -62,7 +62,7 @@ class Main(ExtensionBase):
 		num = ('0⃣','1⃣','2⃣','3⃣','4⃣','5⃣','6⃣','7⃣','8⃣')
 		msg = ''
 
-		if difficulty > 100:
+		if not (1 <= difficulty <= 100):
 			await ctx.send("Please enter difficulty in terms of percentage (1-100).")
 			return
 		if width <= 0 or height <= 0:
