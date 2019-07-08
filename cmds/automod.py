@@ -127,6 +127,8 @@ class Automod(ExtensionBase):
 		spaces = ('\u0020', '\u00a0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004', '\u2005', 
 			'\u2006', '\u2007', '\u2008', '\u2009', '\u200a', '\u200b', '\u202f', '\u205f', '\u3000', '\u2800')
 		symbols = ('.', '-', '_', '`', '~', ":", '/', '\\', ';', '+', '(', ')', '*', '^')
+		regional_indicators = ('🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿')
+		number_emojis = ('0⃣','1⃣','2⃣','3⃣','4⃣','5⃣','6⃣','7⃣','8⃣','9⃣')
 		special_words = []
 		settings = self.bot.settings['moderation']['word filter'].copy()
 
@@ -148,11 +150,12 @@ class Automod(ExtensionBase):
 				if (space in word) and (word not in special_words):
 					special_words.append(word)
 					del settings['words'][i]
-					continue
+					break
 			for symbol in symbols:
 				if (symbol in word) and (word not in special_words):
 					special_words.append(word)
 					del settings['words'][i]
+					break
 
 		content = message.content.lower()
 		# filter out possible seperator
@@ -160,6 +163,11 @@ class Automod(ExtensionBase):
 			content = content.replace(c, '')
 		for s in symbols:
 			content = content.replace(s, '')
+		# convert regional indicator and number emojis to plain text
+		for i,ri in enumerate(regional_indicators):
+			content = content.replace(ri, chr(i+97))
+		for i,ne in enumerate(number_emojis):
+			content = content.replace(ri, chr(i+48))
 		# detect bad word(s)
 		if strikes.get(message.author, None) is None:
 			strikes[message.author] = 0
