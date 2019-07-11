@@ -18,7 +18,7 @@ if __name__ == "__main__":
 		loop = asyncio.get_event_loop()
 	os.chdir(Path(__file__).resolve().parent)
 
-	bot = Bot(command_prefix=commands.when_mentioned_or('[', 'libereus'), pm_help=None, loop=loop)
+	bot = Bot(command_prefix=commands.when_mentioned_or('/', 'libereus'), pm_help=None, loop=loop)
 
 	ext_path = "cmds"
 
