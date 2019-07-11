@@ -44,7 +44,8 @@ class Main(ExtensionBase):
 		embed.set_thumbnail(url="https://sc.s-ul.eu/FEYj6UQg")
 		embed.add_field(name="Developers", value=
 			"Tansc#8171 (<@!399471491017605120>)\nProladon#7525 (<@!149772971555160064>)\nNRockhouse#4157 (<@!140526642916229120>)", 
-			inline=False)
+			inline=True)
+		embed.add_field(name="Version", value="0.1.0a build 1", inline=True)
 		embed.add_field(name="Support Server", value="[Link](https://lihi1.cc/j2C5r)" , inline=True)
 		embed.add_field(name="Powered by", value="discord.py v{}".format(discord.__version__), inline=True)
 		embed.add_field(name="Source", value="[Link](https://github.com/Tansc161/Libereus)", inline=True)
