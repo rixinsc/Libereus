@@ -97,8 +97,12 @@ class Main(ExtensionBase):
 						grid[y+1][x]=='💣' if y+1<height else False,
 						grid[y+1][x+1]=='💣' if y+1<height and x+1<width else False
 <<<<<<< HEAD
+<<<<<<< HEAD
 					])]
 		await ctx.send(grid[y][x])
+=======
+					))]
+>>>>>>> 5a39812422d2f82d2cb6fab1d42ab3abf73a42a0
 =======
 					))]
 >>>>>>> 5a39812422d2f82d2cb6fab1d42ab3abf73a42a0
