@@ -1,0 +1,18 @@
+{	
+  "blacklist": {	
+    "guildID": [],
+    "channelID": [],
+    "userID": []
+  },
+  "moderation": {
+  	"hoisting characters": ["!", " ", "\"", "$", "'", "(", ",", "-", ".", "/"],
+  	"word filter": {
+  		"enabled": false,
+  		"words": ["fuck", "fucking", "ass", "asshole", "bitch", "kill myself"],
+  		"threshold": 3,
+  		"action": "kick",
+  		"delete message": true
+  	}
+  },
+  "token": "your bot token here"
+}

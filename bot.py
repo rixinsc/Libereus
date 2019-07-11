@@ -18,7 +18,7 @@ if __name__ == "__main__":
 		loop = asyncio.get_event_loop()
 	os.chdir(Path(__file__).resolve().parent)
 
-	bot = Bot(command_prefix=commands.when_mentioned_or('/', 'libereus'), pm_help=None, loop=loop)
+	bot = Bot(command_prefix=commands.when_mentioned_or('[', 'libereus'), pm_help=None, loop=loop)
 
 	ext_path = "cmds"
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 		except Exception as e:
 			raise RuntimeError from e
 
-	@bot.command(hidden=True)
+	@bot.command()
 	@commands.is_owner()
 	async def reload(ctx, component: str):
 		"""Reload a component."""
@@ -54,12 +54,12 @@ if __name__ == "__main__":
 			await ctx.send('Reloaded settings.')
 			return
 		await wildcardCheck(ctx, "reload", component)
-	@bot.command(hidden=True)
+	@bot.command()
 	@commands.is_owner()
 	async def unload(ctx, component: str):
 		"""Unload a component."""
 		await wildcardCheck(ctx, "unload", component)
-	@bot.command(hidden=True)
+	@bot.command()
 	@commands.is_owner()
 	async def load(ctx, component: str):
 		"""Load a component."""

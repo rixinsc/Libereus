@@ -3,10 +3,11 @@ from core.helper import log, sendError
 from core.scripts import decode
 from core.classes import ExtensionBase
 from core.exceptions import CommandErrorHandled
+import time
 import asyncio
 import discord # for eval use, don't remove
 
-class Owner(ExtensionBase, command_attrs={"hidden":True}):
+class Owner(ExtensionBase):
 	"""Owner commands."""
 	async def cog_check(self, ctx):
 		if not await ctx.bot.is_owner(ctx.author):
@@ -37,7 +38,10 @@ class Owner(ExtensionBase, command_attrs={"hidden":True}):
 		p = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
 		msg = await ctx.send("Executing...")
 		try:
+			stdout, stderr = (None, None)
+			tbefore = time.perf_counter()
 			stdout, stderr = await asyncio.wait_for(p.communicate(), 360)
+			tafter = time.perf_counter()
 		except asyncio.TimeoutError:
 			log(content=f'Command "shell" timed out.')
 			await msg.edit(content="Process timed out.")
@@ -46,9 +50,9 @@ class Owner(ExtensionBase, command_attrs={"hidden":True}):
 			await msg.edit(content="Process cancelled.")
 			await p.terminate()
 		if p.stderr == None:
-			await msg.edit(content=f"```py\nExit code: {p.returncode}\n{decode(stdout)}\n```")
+			await msg.edit(content=f"```py\nExit code: {p.returncode}\n{decode(stdout)}\nTook {round((tafter-tbefore)*1000, 2)}ms```")
 		else:
-			await msg.edit(content=f"```py\nExit code: {p.returncode}\nStdout:\n{decode(stdout)}\nStderr:\n{decode(stderr)}```")
+			await msg.edit(content=f"```py\nExit code: {p.returncode}\nStdout:\n{decode(stdout)}\nStderr:\n{decode(stderr)}\nTook {round((tafter-tbefore)*1000, 2)}ms```")
 
 	@commands.command()
 	async def shutdown(self, ctx):
