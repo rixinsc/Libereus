@@ -167,7 +167,7 @@ class Automod(ExtensionBase):
 		for i,ri in enumerate(regional_indicators):
 			content = content.replace(ri, chr(i+97))
 		for i,ne in enumerate(number_emojis):
-			content = content.replace(ri, chr(i+48))
+			content = content.replace(ne, chr(i+48))
 		# detect bad word(s)
 		if strikes.get(message.author, None) is None:
 			strikes[message.author] = 0
