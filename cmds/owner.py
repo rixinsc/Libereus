@@ -6,6 +6,7 @@ from core.exceptions import CommandErrorHandled
 import time
 import asyncio
 import discord # for eval use, don't remove
+import json
 
 class Owner(ExtensionBase):
 	"""Owner commands."""
@@ -60,6 +61,17 @@ class Owner(ExtensionBase):
 		await ctx.send("Shutting down...")
 		await asyncio.sleep(1)
 		await self.bot.logout()
+
+	@commands.command()
+	async def prefix(self, ctx, *, pre):
+		"""Change Prefix."""
+		with open('settings.json', 'r', encoding='utf-8') as jfile:
+			prefixes = json.load(jfile)
+		prefixes[str(ctx.guild.id)] = pre
+		await ctx.send(f'{pre} new prefix add')
+		with open('settings.json', 'w', encoding='utf-8') as jfile:
+			json.dump(prefixes, jfile, indent=4)
+
 
 def setup(bot):
 	bot.add_cog(Owner(bot))
