@@ -20,11 +20,11 @@ if __name__ == "__main__":
 
 	def get_prefix(bot, ctx):
 		if not ctx.guild:
-			return commands.when_mentioned_or('[', 'libereuse')(bot, ctx)
+			return commands.when_mentioned_or('/', 'libereuse')(bot, ctx)
 		with open('settings.json') as jfile:
 			prefixes = json.load(jfile)
 		if str(ctx.guild.id) not in prefixes:
-			return commands.when_mentioned_or('[', 'libereuse')(bot, ctx)
+			return commands.when_mentioned_or('/', 'libereuse')(bot, ctx)
 		prefix = prefixes[str(ctx.guild.id)]
 		return commands.when_mentioned_or(prefix)(bot, ctx)
 
