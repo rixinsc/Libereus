@@ -23,11 +23,7 @@ class Owner(ExtensionBase):
 			await ctx.send('Cannot evaluate an empty string.')
 			return
 		try:
-			if content.strip().startswith("await "):
-				content = content.strip()[6:]
-				result = await eval(content)
-			else:
-				result = eval(content)
+			result = eval(content)
 			await ctx.send(f'```py\n{result}\n```')
 		except Exception as e:
 			await sendError(ctx, e)
