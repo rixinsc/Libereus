@@ -3,7 +3,7 @@
 [![discord](https://lihi1.cc/7CBE7)](https://lihi1.cc/j2C5r)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-367/)
 
-Libereus is a self-hosted only Discord moderation bot written in Python 3.6 that aims to let server moderator lives better, initially created as a submission to participate in [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33) and got [second place](https://blog.discordapp.com/discord-community-hack-week-category-winners-bd0364360f92). Our original submission can be found [here](https://github.com/Tansc161/Libereus-DHW19).
+Libereus is a self-hosted only Discord moderation bot written in Python 3.6 that aims to make server moderators' lives easier. Initially created as a submission to participate in [Discord Hack Week 2019](https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33) and received [second place](https://blog.discordapp.com/discord-community-hack-week-category-winners-bd0364360f92). Our original submission can be found [here](https://github.com/Tansc161/Libereus-DHW19).
 
 It has the ability to:
 > ✅ Prune inactive members via their last message's date  
