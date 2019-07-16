@@ -1,6 +1,7 @@
 from discord.ext import commands
 from core.classes import ExtensionBase
 import discord
+import json
 
 class Moderation(ExtensionBase):
 	"""Moderation commands."""
@@ -52,7 +53,29 @@ class Moderation(ExtensionBase):
 		As of now, it needs a role named `Muted`."""
 		mute_role = discord.utils.get(ctx.guild.roles, name='Muted')
 		if mute_role == None:
-			await ctx.send("The guild doesn't have `Mute` role !")
+			await ctx.send("The guild doesn't have `Mute` role ! Do u wanna create ones? (y/n)")
+			try:
+				response = await self.bot.wait_for('message', 
+					check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, 
+					timeout=120.0)
+			except TimeoutError:
+				await ctx.send("Timeout reached, task cancelled.")
+			response.content = response.content.lower()
+			if response.content in ('y', 'yes'):
+				perms = discord.Permissions()
+				perms.update(send_messages=False, read_messages=True, speak=False, send_tts_messages=False)
+				mute_role = await ctx.guild.create_role(name='Muted', Permission= perms)
+				await ctx.send('Role created!')
+				await member.add_roles(mute_role, reason="Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author))
+				embed = discord.Embed(color=0xfa144e)
+				embed.add_field(name="Mute", value=f"{member} has been muted!")
+				await ctx.send(embed=embed)
+			elif response.content in ('n', 'no'):
+				await ctx.send("Task aborted.")
+			elif response.content in ('c', 'cancel'):
+				await ctx.send("Task cancelled.")
+			else:
+				await ctx.send("Invalid response, task cancelled.")
 		else:
 			await member.add_roles(mute_role, reason="Reason: {reason} | Requested by {mod}.".format(reason=reason, mod=ctx.author))
 			embed = discord.Embed(color=0xfa144e)
@@ -63,7 +86,7 @@ class Moderation(ExtensionBase):
 	@commands.has_permissions(manage_roles=True)
 	async def unmute(self, ctx, member: discord.Member):
 		"""Unmute previously muted user in the guild."""
-		mute_role = discord.utils.get(ctx.guild.roles, name='Mute')
+		mute_role = discord.utils.get(ctx.guild.roles, name='Muted')
 		await member.remove_roles(mute_role)
 		embed = discord.Embed(color=0x91e873)
 		embed.add_field(name="Mute", value=f"{member} has been un-muted!")
@@ -83,6 +106,39 @@ class Moderation(ExtensionBase):
 				count += 1
 		await status_msg.edit(content="✅ Removed hoisting characters for {count} member{s}.".
 			format(count=count, s='s' if count>1 else ''))
+
+	@commands.command()
+	@commands.has_permissions(manage_roles=True)
+	async def trust(self, ctx, user: discord.Member):
+		"""Add user to trustlist"""
+		with open('settings.json', 'r', encoding='utf-8') as jfile:
+			trust_members = json.load(jfile)
+		if user.id not in trust_members['trustlist']:
+			trust_members['trustlist'].append(user.id)
+			with open('settings.json', 'w', encoding='utf-8') as jdata:
+				json.dump(trust_members, jdata, indent=4)
+			embed = discord.Embed(color=0x91e873)
+			embed.add_field(name="Trust", value='{} has been add in trustlist'.format(user))
+			await ctx.send(embed=embed)
+		else:
+			await ctx.send('⚠ {} has already in trustlist.'.format(user))
+
+	@commands.command()
+	@commands.has_permissions(manage_roles=True)
+	async def untrust(self, ctx, user: discord.Member):
+		"""Remove user from trustlist"""
+		with open('settings.json', 'r', encoding='utf-8') as jfile:
+			trust_members = json.load(jfile)
+		if user.id in trust_members['trustlist']:
+			trust_members['trustlist'].remove(user.id)
+			with open('settings.json', 'w', encoding='utf-8') as jdata:
+				json.dump(trust_members, jdata, indent=4)
+			embed = discord.Embed(color=0xfa144e)
+			embed.add_field(name="Un-Trust", value="{} has been remove from trustlist.".format(user))
+			await ctx.send(embed=embed)
+		else:
+			await ctx.send("⚠ {} dosen't exist in trustlist.".format(user))
+
 
 def setup(bot):
 	bot.add_cog(Moderation(bot))
