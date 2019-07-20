@@ -139,6 +139,13 @@ class Moderation(ExtensionBase):
 		else:
 			await ctx.send("⚠ {} dosen't exist in trustlist.".format(user))
 
+	@commands.command(aliases=['clear', 'prune'])
+	@commands.has_permissions(manage_messages=True)
+	async def purge(self, ctx, nums: int):
+		"""Purge message with numbers."""
+		deleted = await ctx.channel.purge(limit=int(nums)+1)
+		result = await ctx.channel.send('Deleted {} message(s).'.format(len(deleted) - 1))
+		await result.delete(delay= 3.0)
 
 def setup(bot):
 	bot.add_cog(Moderation(bot))

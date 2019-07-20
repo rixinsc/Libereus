@@ -107,5 +107,26 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 		"""Alias to `channel create` command."""
 		await ctx.invoke(self.bot.get_command('channel create'), ctype, name)
 
+	@commands.command()
+	async def voicekick(self, ctx, members: commands.Greedy[typing.Union[discord.Member, discord.Role]], reason = "N/A"):
+		"""kick the member out of channel"""
+		if ctx.author.guild_permissions.move_members == True:
+			kick = []
+			for m in members:
+				if isinstance(m, discord.Member):
+					for v in ctx.guild.voice_channels:
+						if m in v.members:
+							kick.append(m.name)
+							await m.edit(voice_channel=None)
+				elif isinstance(m, discord.Role):
+					for user in m.members:
+						for v in ctx.guild.voice_channels:
+							if user in v.members:
+								kick.append(user.name)
+								await user.edit(voice_channel=None)
+			await ctx.send('kicked {}'.format(kick))
+		else:
+			await ctx.send("You don't have enough permissions !")
+
 def setup(bot):
 	bot.add_cog(DiscordActions(bot))
