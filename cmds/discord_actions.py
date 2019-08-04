@@ -128,5 +128,16 @@ class DiscordActions(ExtensionBase, name="Discord Actions"):
 		else:
 			await ctx.send("You don't have enough permissions !")
 
+	@commands.command()
+	@commands.has_permissions(manage_channels=True)
+	async def voicemoveall(self, ctx, origin: discord.VoiceChannel, target: discord.VoiceChannel, reason="N/A"):
+		"""move all members from channel to channel"""
+		if ctx.author.guild_permissions.move_members == True:
+			if origin in ctx.guild.voice_channels and target in ctx.guild.voice_channels:
+				for members in origin.members:
+					await members.edit(voice_channel=target)
+		res = f"Moved all member(s) from {origin.mention} to {target.mention}."
+		await ctx.send(res)
+
 def setup(bot):
 	bot.add_cog(DiscordActions(bot))
