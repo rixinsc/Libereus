@@ -10,6 +10,7 @@ from discord import DMChannel
 from pathlib import Path
 from fnmatch import filter
 
+
 if __name__ == "__main__":
 	# Initialise
 	if sys.platform == 'win32':

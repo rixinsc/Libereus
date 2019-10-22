@@ -1,5 +1,5 @@
 from discord.ext import commands
-from core.helper import log, sendError
+from core.helper import sendError, logger
 from core.scripts import decode
 from core.classes import ExtensionBase
 from core.exceptions import CommandErrorHandled
@@ -7,6 +7,7 @@ import time
 import asyncio
 import discord # for eval use, don't remove
 import json
+
 
 class Owner(ExtensionBase):
 	"""Owner commands."""
@@ -40,10 +41,12 @@ class Owner(ExtensionBase):
 			stdout, stderr = await asyncio.wait_for(p.communicate(), 360)
 			tafter = time.perf_counter()
 		except asyncio.TimeoutError:
-			log(content=f'Command "shell" timed out.')
+                        #change to logging
+			logger.info(content=f'Command "shell" timed out.')
 			await msg.edit(content="Process timed out.")
 		except asyncio.CancelledError:
-			log(content="Process cancelled.")
+                        #change to logging
+			logger.info(content="Process cancelled.")
 			await msg.edit(content="Process cancelled.")
 			await p.terminate()
 		if p.stderr == None:

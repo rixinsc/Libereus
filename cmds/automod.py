@@ -1,9 +1,10 @@
 from discord.ext import commands, tasks
 from core.classes import ExtensionBase
-from core.helper import log, cmderr, eprint
+from core.helper import cmderr, eprint, logger
 import discord
 from random import randint
 import datetime
+
 
 class Automod(ExtensionBase):
 	"""Auto moderation commands."""
@@ -88,12 +89,14 @@ class Automod(ExtensionBase):
 		if response.content == f"yes {rand}":
 			kick_status = await ctx.send("Kicking users...")
 			for m in no_activity_members:
-				log(content=f"Kicking {m} (no activity)")
+                                #change to logging
+				logger.info(content=f"Kicking {m} (no activity)")
 				await ctx.guild.kick(m, 
 					reason="Haven't send a single message in the server, requested by {member}.".
 					format(member=ctx.author))
 			for m in inactive_members:
-				log(content=f'Kicking {m} (inactive)')
+                                #change to logging
+				logger.info(content=f'Kicking {m} (inactive)')
 				await ctx.guild.kick(m, 
 					reason="Haven't send a message in {days} days, requested by {member}.".
 					format(days=days, member=ctx.author))
